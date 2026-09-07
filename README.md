@@ -1,20 +1,28 @@
-# Data Cleansing & Text Normalization Pipeline 📊🚀
+# Automated Data Audit & Conciliation Pipeline 📊🚀
 
-Este proyecto resuelve uno de los mayores problemas operativos en el análisis de datos corporativos: la inconsistencia en los registros manuales de texto (direcciones, razones sociales, códigos postales y datos numéricos mal formateados). 
+Este repositorio contiene un ecosistema de scripts en Python desarrollado en entornos Jupyter/Colab para resolver uno de los problemas operativos más críticos en las empresas: la conciliación automatizada de datos y la auditoría estricta de reportes masivos de Excel que presentan inconsistencias de captura manual.
 
-Desarrollé un pipeline automatizado en Python capaz de estandarizar bases de datos complejas para auditorías, cruces de información o procesos de ETL (Extract, Transform, Load), minimizando los falsos negativos al comparar registros.
-
-## 🛠️ Tecnologías y Conceptos Utilizados
+## 🛠️ Tecnologías y Conceptos Clave
 * **Python 3.x**
-* **Pandas:** Carga dinámica y manipulación estructural de DataFrames de gran volumen.
-* **Regex (Expresiones Regulares):** Tratamiento avanzado de texto, detección de abreviaturas y mapeo de patrones complejos.
-* **Unicodedata:** Normalización de caracteres Unicode (remoción de acentos y gestión de espacios ocultos o especiales).
+* **Pandas:** Uso avanzado de `DataFrames`, uniones estructurales (`outer merges`), tratamiento de tipos de datos y indexación dinámica.
+* **Regex (Expresiones Regulares):** Tratamiento y homologación de patrones de texto complejos (razones sociales, siglas viales).
+* **Unicodedata:** Estandarización de caracteres Unicode, eliminación de acentos y manejo de espacios especiales (`NBSP`, `NFD`).
+* **Glob & OS:** Escaneo automatizado de directorios locales para procesar múltiples informes operativos simultáneamente.
 
-## ✨ Características Principales del Código
-1. **Normalización Inteligente:** Convierte texto eliminando acentos, estandariza espacios especiales (`NBSP`, `NFD`) y soluciona el típico error de flotantes convertidos a texto por Excel (`20210.0` ➡️ `20210`).
-2. **Algoritmo de Homologación Corporativa:** Convierte e iguala diferentes escrituras de razones sociales (`S.A. DE C.V.`, `sa de cv`, `S. A.`) y abreviaturas viales (`Blvd.`, `Carr.`, `Col.`) a un formato único comparable sin alterar el archivo original.
-3. **Ingesta de Datos Dinámica:** Lee archivos de Excel localizando de forma automática la fila exacta donde inician los encabezados reales mediante un sistema inteligente de coincidencia de columnas clave (`id ine`, `empresa`, etc.).
+## ✨ Arquitectura del Proyecto (Módulos)
+
+### 1️⃣ Canalización de Limpieza y Homologación de Datos
+* **Normalización Avanzada:** Corrige errores clásicos de formateo (como códigos postales o IDs numéricos transformados erróneamente en flotantes de texto `20210.0` ➡️ `20210`).
+* **Algoritmo Corporativo Inteligente:** Normaliza e iguala registros dispares de razones sociales (`S.A. DE C.V.` vs `sa de cv`) y abreviaturas de vialidades (`Blvd.`, `Av.`, `Carr.`) para evitar falsos negativos en los cruces.
+* **Ingesta Dinámica:** Escanea las primeras filas de los archivos Excel para localizar de forma automática el encabezado real mediante la coincidencia de columnas clave.
+
+### 2️⃣ Motor de Auditoría Estricta y Conciliación
+* Ejecuta un **Outer Join matricial** completo para confrontar una base de datos maestra (Testigo) contra múltiples archivos satélite de forma masiva.
+* Segmenta y exporta dinámicamente un reporte maestro final en Excel estructurado en pestañas automatizadas según el tipo de discrepancia:
+  * ❌ **Folios Faltantes:** Registros omitidos en la operación.
+  * 💰 **Diferencia Costos:** Descuadres financieros redondeados matemáticamente a dos decimales.
+  * 📍 **Diferencia Dirección y CP:** Errores de ubicación y códigos postales extraídos.
 
 ## 🚀 Impacto en el Negocio
-* **Ahorro de Tiempo:** Reduce en un 90% las horas invertidas manualmente por los equipos de operaciones y finanzas en la conciliación de reportes.
-* **Integridad de Datos:** Asegura auditorías precisas al evitar duplicados ocultos por errores ortográficos o de captura de datos.
+* **Mitigación de Riesgos Financieros:** Identifica instantáneamente desviaciones de costos y errores de facturación.
+* **Automatización de Auditorías:** Transforma un proceso manual que toma días de validación por equipos de finanzas y operaciones, en una ejecución precisa de solo unos segundos.
